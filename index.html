@@ -55,6 +55,20 @@ lines(x, exp(x) - 1,col="orange",type="p")
 vertical <- seq(0,2,by=0.5)
 abline(v=vertical,lty="dashed")
 
+whichone <- function(interval) {
+  from <- interval[1]
+  to <- interval[2]
+  valuegrowth <- c()
+  functionnames <- c("linear","sqrt","power ^2","power ^3","exponential")
+  valuegrowth <- c(valuegrowth, to-from)
+  valuegrowth <- c(valuegrowth, sqrt(to)-sqrt(from))
+  valuegrowth <- c(valuegrowth, to^2-from^2)
+  valuegrowth <- c(valuegrowth, to^3-from^3)
+  valuegrowth <- c(valuegrowth, exp(to)-exp(from))
+  functionnames[which(valuegrowth == max(valuegrowth))]
+}
+whichone(c(0,.5))
+
 #(b)
 plot(x, log(x),ylim=c(-12,3),col="black",type="p")
 lines(x, log(sqrt(x)),col="blue",type="p")
@@ -216,6 +230,7 @@ curve(t2(x)*.9,xlim=limit,add=TRUE,col="orange",lwd=2,lty="dotted")
 
 #(f)
 #The best tax reduction plan for people with lower incomes is obviously the one where the government deducts 2k off the calculated tax.
+
 		</code>
 	</pre><!--
 </main>
