@@ -69,7 +69,8 @@ whichone <- function(interval) {
 }
 whichone(c(.8,1.2))
 for (i in seq(.01,2,by=.01)) {
-  print(whichone(c(i-0.01,i)))
+  printit <- paste(whichone(c(i-0.01,i)), i)
+  print(printit)
 }
 
 #(b)
@@ -77,10 +78,27 @@ plot(x, log(x),ylim=c(-12,3),col="black",type="p")
 lines(x, log(sqrt(x)),col="blue",type="p")
 lines(x, log(x^2),col="red",type="p")
 lines(x, log(x^3),col="green",type="p")
-lines(x, log(exp(x)),col="orange",type="p")
+lines(x, log(exp(x)-1),col="orange",type="p")
 vertical <- seq(0,2,by=0.5)
 abline(v=vertical,lty="dashed")
 
+whichone_b <- function(interval) {
+  from <- interval[1]
+  to <- interval[2]
+  valuegrowth <- c()
+  functionnames <- c("linear black","sqrt blue","power ^2 red","power ^3 green","exponential orange")
+  valuegrowth <- c(valuegrowth, log(to)-log(from))
+  valuegrowth <- c(valuegrowth, log(sqrt(to))-log(sqrt(from)))
+  valuegrowth <- c(valuegrowth, log(to^2)-log(from^2))
+  valuegrowth <- c(valuegrowth, log(to^3)-log(from^3))
+  valuegrowth <- c(valuegrowth, log(exp(to)-1)-log(exp(from)-1))
+  functionnames[which(valuegrowth == max(valuegrowth))]
+}
+whichone_b(c(.8,1.2))
+for (i in seq(.01,2,by=.01)) {
+  printit <- paste(whichone_b(c(i-0.01,i)), i)
+  print(printit)
+}
 
 #Problem 2
 
