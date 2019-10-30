@@ -46,7 +46,7 @@ main {
 x <- seq(.01,2,.01)
 
 #(a)
-plot(x,x,ylim=c(-12,10),col="black",type="p")
+plot(x,x,ylim=c(-.5,10),col="black",type="p")
 lines(x, sqrt(x),col="blue",type="p")
 lines(x, x^2,col="red",type="p")
 lines(x, x^3,col="green",type="p")
@@ -59,7 +59,7 @@ whichone <- function(interval) {
   from <- interval[1]
   to <- interval[2]
   valuegrowth <- c()
-  functionnames <- c("linear","sqrt","power ^2","power ^3","exponential")
+  functionnames <- c("linear black","sqrt blue","power ^2 red","power ^3 green","exponential orange")
   valuegrowth <- c(valuegrowth, to-from)
   valuegrowth <- c(valuegrowth, sqrt(to)-sqrt(from))
   valuegrowth <- c(valuegrowth, to^2-from^2)
@@ -67,7 +67,10 @@ whichone <- function(interval) {
   valuegrowth <- c(valuegrowth, exp(to)-exp(from))
   functionnames[which(valuegrowth == max(valuegrowth))]
 }
-whichone(c(0,.5))
+whichone(c(.8,1.2))
+for (i in seq(.01,2,by=.01)) {
+  print(whichone(c(i-0.01,i)))
+}
 
 #(b)
 plot(x, log(x),ylim=c(-12,3),col="black",type="p")
