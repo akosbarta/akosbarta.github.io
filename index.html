@@ -43,215 +43,142 @@ main {
 		<code class="prettyprint">
 #Problem 1
 
-x <- seq(.01,2,.01)
-
 #(a)
-plot(x,x,ylim=c(-.5,10),col="black",type="p")
-lines(x, sqrt(x),col="blue",type="p")
-lines(x, x^2,col="red",type="p")
-lines(x, x^3,col="green",type="p")
-lines(x, exp(x) - 1,col="orange",type="p")
 
-vertical <- seq(0,2,by=0.5)
-abline(v=vertical,lty="dashed")
+demand <- function(price) {
+  pmax(0,15 - price*1.5)
+}
 
-whichone <- function(interval) {
-  from <- interval[1]
-  to <- interval[2]
-  valuegrowth <- c()
-  functionnames <- c("linear black","sqrt blue","power ^2 red","power ^3 green","exponential orange")
-  valuegrowth <- c(valuegrowth, to-from)
-  valuegrowth <- c(valuegrowth, sqrt(to)-sqrt(from))
-  valuegrowth <- c(valuegrowth, to^2-from^2)
-  valuegrowth <- c(valuegrowth, to^3-from^3)
-  valuegrowth <- c(valuegrowth, exp(to)-exp(from))
-  functionnames[which(valuegrowth == max(valuegrowth))]
+expenditure <- function(price) {
+  pmax(0,15 - price*1.5)*price
 }
-whichone(c(.8,1.2))
-for (i in seq(.01,2,by=.01)) {
-  printit <- paste(whichone(c(i-0.01,i)), i)
-  print(printit)
-}
+
+curve(expenditure(x),xlim=c(0,30))
+curve(demand(x),xlim=c(0,30),add=TRUE,col="red")
 
 #(b)
-plot(x, log(x),ylim=c(-12,3),col="black",type="p")
-lines(x, log(sqrt(x)),col="blue",type="p")
-lines(x, log(x^2),col="red",type="p")
-lines(x, log(x^3),col="green",type="p")
-lines(x, log(exp(x)-1),col="orange",type="p")
-vertical <- seq(0,2,by=0.5)
-abline(v=vertical,lty="dashed")
+demand_b <- function(price) {
+pmax(0,15*0.8^price)
+}
 
-whichone_b <- function(interval) {
-  from <- interval[1]
-  to <- interval[2]
-  valuegrowth <- c()
-  functionnames <- c("linear black","sqrt blue","power ^2 red","power ^3 green","exponential orange")
-  valuegrowth <- c(valuegrowth, log(to)-log(from))
-  valuegrowth <- c(valuegrowth, log(sqrt(to))-log(sqrt(from)))
-  valuegrowth <- c(valuegrowth, log(to^2)-log(from^2))
-  valuegrowth <- c(valuegrowth, log(to^3)-log(from^3))
-  valuegrowth <- c(valuegrowth, log(exp(to)-1)-log(exp(from)-1))
-  functionnames[which(valuegrowth == max(valuegrowth))]
+expenditure_b <- function(price) {
+  pmax(0,15*0.8^price)*price
 }
-whichone_b(c(.8,1.2))
-for (i in seq(.01,2,by=.01)) {
-  printit <- paste(whichone_b(c(i-0.01,i)), i)
-  print(printit)
-}
+
+curve(expenditure_b(x),xlim=c(0,30),add=TRUE,lty="dashed")
+curve(demand_b(x),xlim=c(0,30),add=TRUE,col="red",lty="dashed")
 
 #Problem 2
 
-#(a) (b)
-
-relDiff <- function(x1=100,x2,x3) {
-  if (is.numeric(x1)&&is.numeric(x2)&&is.numeric(x3)) {
-    c((x2-x1)/x1,(x3-x2)/x2)
+pascal <- function(x) {
+  returnit <- c()
+  for (i in seq(0,x)) {
+    returnit <- c(returnit,choose(x,i))
   }
+  returnit
 }
 
-relDiff(80, 50, 100)
-relDiff(x3 = 10, x2 = 40)
-relDiff(70, 90)
+pascal(6)
 
-relDiff 
-
-#(c)
-
-relDiff <- function(sequence) {
-  returned <- c()
-  for(i in seq(2,length(sequence))) {
-    returned <- c(returned,round((sequence[i] - sequence[i-1])/sequence[i-1],3))
-  }
-  returned
-}
-
-relDiff(seq(1,10,by=1))
-
-#(d)
-x <- seq(1,100)
-y1 <- diff(x)
-y2 <- relDiff(x)
-y3 <- diff(log(x))
-y4 <- relDiff(exp(x))
-
-print(y1)
-print(y2)
-print(y3)
-print(y4)
 
 #Problem 3
-#(a)
-powerFun <- function(x,a,r) {
-  if (x > 0 && is.numeric(x) && is.numeric(a) && is.finite(r)) {
-    a*x^r
-  }
+
+count_chars_in_table <- function(v1,v2) {
+  v1_a <- unlist(strsplit(tolower(v1),NULL), use.names=FALSE)
+  length(which(match(v1_a,v2,nomatch=0)>0))
 }
+count_chars_in_table("Wien",letters[1:13])
 
-powerFun(3,1,sqrt(2))
-
-#(b)
-x <- seq(.5, 2, .01)
-a <- 1
-r <- c(-2,-1,-0.5,0.5,1,2)
-
-plot(x,powerFun(x,1,r),type="p",xlim=c(-2,3),ylim=c(-2,4))
-
-#(c)
-lines(log(x), log(powerFun(x,a,r)),col="red",type="p")
-#They become linear.
 
 #Problem 4
-polyEval <- function(x,a) {
-  if (is.numeric(x) && is.vector(a)) {
-    result <- 0
-    for (ai in seq(0,length(a)-1)) {
-      result <- a[ai+1]*x^(ai) + result
-    }
-    result
-  }
-}
 
-polyEval(2, c(2,3,1))
+no_of_odds <- function(x) {
+  length(which(x%%2==1))
+}
+no_of_odds(seq(1,6))
+
 
 #Problem 5
-curve(exp(x),xlim=c(-10,10),ylim=c(-20,20))
-abline(h=0,col="red")
-abline(v=0,col="red")
-curve(-exp(x),add=TRUE)
-curve(-exp(x+2),add=TRUE)
-curve(-1.5*exp(x+2),add=TRUE)
-curve(-1.5*exp(-x+2)-1,add=TRUE,col="green")
 
-#Problem 6
 #(a)
 
+curve(4-(3*x^3),xlim=c(-7,7),ylim=c(-7,7))
+curve(((x-4)/(-3))^(1/3),xlim=c(-7,7),add=TRUE)
+curve(-((x-4)/(3))^(1/3),xlim=c(-7,7),add=TRUE)
+curve(x-0,add=TRUE,col="green")
+abline(h=0,v=0,col="red")
+
 #(b)
+curve(1+x^2,xlim=c(0,7),ylim=c(0,7))
+curve(sqrt(x-1),xlim=c(0,7),ylim=c(0,7),add=TRUE)
+curve(x-0,add=TRUE,col="green")
+abline(h=0,v=0,col="red")
 
 #(c)
+
+func5c <- function(x) {
+  ifelse(x>1,log(x^2),(exp(x)-exp(1)))
+}
+
+f1 <- function(x) {
+  exp(x/2)
+}
+f2 <- function(x) {
+  log(((exp(1))+x))
+}
+#uniroot(function(x) f1(x)-f2(x),c(,101))$root
+
+func5c_inverse <- function(x) {
+  ifelse(x>0,exp(x/2),log(((exp(1))+x)))
+}
 rm(x)
-curve(exp(-x^2)+x/5-0.7,xlim=c(-10,10))
-abline(h=0,lty="dashed")
-uniroot(function(x)exp(-x^2)+x/5-0.7,lower=-10,upper=10)
-abline(v=3.5,lty="dotted")
-abline(v=-0.4781401,lty="dotted")
-abline(v=0.7803416,lty="dotted")
+x <- seq(0,2,by=.01)
+func5c(1)
+func5c_inverse(0)
+func5c_inverse(1.386294)
+func5c_inverse(0.99)
+
+points(1.00000001,func5c_inverse(1.00000001))
+
+curve(func5c(x),xlim=c(-4,8),ylim=c(-3,8))
+curve(func5c_inverse(x),xlim=c(-4,8),add=TRUE)
+curve(x-0,add=TRUE,col="green")
+abline(v=1)
+abline(h=0)
 
 #Problem 7
-
-func7 <- function(x) {
-  exp(-(x-2)^2)
+polyPrint <- function(a) {
+    equ <- NULL
+    for(i in seq(1,length(a))) {
+      if (a[i] != 0) {
+        if (a[i] < 0) {
+          separator <- ""
+        } else {
+          separator <- "+"
+        }
+        if (i == 1) {
+          equ <- paste(equ,a[i],sep="")
+        } else {
+          if (a[i] == 1) {
+            tempequ <- paste("x^",i-1,sep="")
+            equ <- paste(equ,tempequ,sep=separator)
+          } else {
+            tempequ <- paste(a[i],"*x^",i-1,sep="")
+            equ <- paste(equ,tempequ,sep=separator)
+          }
+        }
+      }
+    }
+    if (substr(equ, 0, 1) == "+") {
+      equ <- substring(equ, 2)
+    }
+    print(equ)
 }
+polyPrint(c(10,1,-24,-3,0,21,0,0,0,0,0,0,0,11))
 
-curve(func7,xlim=c(-10,10))
-optimize(func7, interval=c(-10, 10), maximum=TRUE)
+?unlist
+?sum
 
-#Problem 8
-
-t1 <- function(i) {
-  ifelse(i <= 30,i*.2,30*.2 + (i-30)*.4)
-}
-
-t2 <- function(i) {
-  ifelse(i <= 20,i*.15,ifelse(i > 30,20*.15 + 10*.3 + (i-30)*.6,20*.15 + (i-20)*.3))
-}
-#(a)
-for (x in seq(0:100)) {
-  if (t1(x) == t2(x)) {
-    print(x)
-  }
-}
-
-t1(30)
-t2(30)
-
-#(b)
-curve(t1(x),xlim=c(0,50))
-curve(t2(x),xlim=c(0,50),add=TRUE,col="red")
-
-#(c)
-# The first one favours the rich.
-# The second one favours the poor.
-
-#(d)
-limit <- c(0,100)
-curve(t1(x),xlim=limit,lwd=2)
-curve(t1(x-2),xlim=limit,lty="dashed",lwd=2,add=TRUE)
-curve(t1(x)-2,xlim=limit,lty="dotted",lwd=2,add=TRUE)
-curve(t2(x),xlim=limit,add=TRUE,col="red",lwd=2)
-curve(t2(x-2),xlim=limit,add=TRUE,col="red",lwd=2,lty="dashed")
-curve(t2(x)-2,xlim=limit,add=TRUE,col="red",lwd=2,lty="dotted")
-
-#(e)
-curve(t1(x),xlim=limit,lwd=2,col="darkgreen",add=TRUE)
-curve(t1(x*.95),xlim=limit,lty="dashed",lwd=2,add=TRUE,col="darkgreen")
-curve(t1(x)*.9,xlim=limit,lty="dotted",lwd=2,add=TRUE,col="darkgreen")
-curve(t2(x),xlim=limit,add=TRUE,col="orange",lwd=2)
-curve(t2(x*.95),xlim=limit,add=TRUE,col="orange",lwd=2,lty="dashed")
-curve(t2(x)*.9,xlim=limit,add=TRUE,col="orange",lwd=2,lty="dotted")
-
-#(f)
-#The best tax reduction plan for people with lower incomes is obviously the one where the government deducts 2k off the calculated tax.
 
 		</code>
 	</pre><!--
