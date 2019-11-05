@@ -167,14 +167,19 @@ polyPrint <- function(a) {
         if (i == 1) {
           equ <- paste(equ,a[i],sep="")
         } 
-        
         else if (i == 2) {
-          tempequ <- paste(a[i],"*x",sep="")
-          equ <- paste(equ,tempequ,sep=separator)
+          if (a[i] == 1 || a[i] == -1) {
+            if (a[i] == -1) { separator = "-"}
+            equ <- paste(equ,"x",sep=separator)
+          } else {
+            tempequ <- paste(a[i],"*x",sep="")
+            equ <- paste(equ,tempequ,sep=separator)
+          }
         }
         else {
-          if (a[i] == 1) {
+          if (a[i] == 1 || a[i] == -1) {
             tempequ <- paste("x^",i-1,sep="")
+            if (a[i] == -1) { separator = "-"}
             equ <- paste(equ,tempequ,sep=separator)
           } else {
             tempequ <- paste(a[i],"*x^",i-1,sep="")
@@ -191,8 +196,9 @@ polyPrint <- function(a) {
    FALSE 
   }
 }
-polyPrint(c(0,2,0,0,0,-2,0,3))
-polyPrint1(c(0,2,0,0,0,-2,0,3))
+
+polyPrint(c(-1,1,0,0,0,-2,0,-1))
+
 
 		</code>
 	</pre>
