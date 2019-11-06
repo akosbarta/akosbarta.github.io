@@ -12,9 +12,9 @@
 }
 
 body {
-	background: #42275a;  /* fallback for old browsers */
-	background: -webkit-linear-gradient(to right, #734b6d, #42275a);  /* Chrome 10-25, Safari 5.1-6 */
-	background: linear-gradient(to right, #734b6d, #42275a); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+	background: #485563;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #29323c, #485563);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #29323c, #485563); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 h1 {
@@ -43,8 +43,7 @@ main {
 <title>4th R homework</title>
 </head>
 <body>
-<h1>4th R homework</h1>
-<h2>&copy; Copyright 2019 - Akos Barta</h2>
+<h3>4th R homework</h1>
 <main>
 	<pre>
 		<code class="prettyprint">
@@ -55,6 +54,8 @@ main {
 demand <- function(price) {
   pmax(0,15 - price*1.5)
 }
+
+?pmax
 
 expenditure <- function(price) {
   pmax(0,15 - price*1.5)*price
@@ -78,21 +79,16 @@ curve(demand_b(x),xlim=c(0,30),add=TRUE,col="red",lty="dashed")
 #Problem 2
 
 pascal <- function(x) {
-  returnit <- c()
-  for (i in seq(0,x)) {
-    returnit <- c(returnit,choose(x,i))
-  }
-  returnit
+c(choose(x,seq(0,x)))
 }
 
-pascal(6)
+pascal(16)
 
 
 #Problem 3
 
 count_chars_in_table <- function(v1,v2) {
-  v1_a <- unlist(strsplit(tolower(v1),NULL), use.names=FALSE)
-  length(which(match(v1_a,v2,nomatch=0)>0))
+  length(which(match(unlist(strsplit(tolower(v1),NULL), use.names=FALSE),v2,nomatch=0)>0))
 }
 count_chars_in_table("Wien",letters[1:13])
 
@@ -105,9 +101,8 @@ no_of_odds <- function(x) {
 no_of_odds(seq(1,6))
 
 
-
 #Problem 5
-
+x <- seq(-2,5,by=.1)
 #(a)
 
 curve(4-(3*x^3),xlim=c(-7,7),ylim=c(-7,7))
@@ -116,11 +111,15 @@ curve(-((x-4)/(3))^(1/3),xlim=c(-7,7),add=TRUE)
 curve(x-0,add=TRUE,col="green")
 abline(h=0,v=0,col="red")
 
+4-(3*(((x-4)/(-3))^(1/3))^3)
+
 #(b)
 curve(1+x^2,xlim=c(0,7),ylim=c(0,7))
 curve(sqrt(x-1),xlim=c(0,7),ylim=c(0,7),add=TRUE)
 curve(x-0,add=TRUE,col="green")
 abline(h=0,v=0,col="red")
+
+sqrt((1+x^2)-1)
 
 #(c)
 
@@ -128,25 +127,14 @@ func5c <- function(x) {
   ifelse(x>1,log(x^2),(exp(x)-exp(1)))
 }
 
-f1 <- function(x) {
-  exp(x/2)
-}
-f2 <- function(x) {
-  log(((exp(1))+x))
-}
-#uniroot(function(x) f1(x)-f2(x),c(,101))$root
-
 func5c_inverse <- function(x) {
   ifelse(x>0,exp(x/2),log(((exp(1))+x)))
 }
-rm(x)
-x <- seq(0,2,by=.01)
-func5c(1)
-func5c_inverse(0)
-func5c_inverse(1.386294)
-func5c_inverse(0.99)
 
-points(1.00000001,func5c_inverse(1.00000001))
+
+rm(x)
+
+func5c_inverse(func5c(x))
 
 curve(func5c(x),xlim=c(-4,8),ylim=c(-3,8))
 curve(func5c_inverse(x),xlim=c(-4,8),add=TRUE)
@@ -198,11 +186,17 @@ polyPrint <- function(a) {
   }
 }
 
-polyPrint(c(-1,1,0,0,0,-2,0,-1))
+polyPrint(c(88,1,0,-1,0,-2))
+
+?unlist
+?sum
+
+?is.na
 
 
 		</code>
 	</pre>
 </main>
+<h6>&copy; Copyright 2019 - Akos Barta</h2>
 </body>
 </html>
