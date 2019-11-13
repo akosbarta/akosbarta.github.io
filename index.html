@@ -38,158 +38,232 @@ main {
 	color: #808080;
 }
 </style>
-<title>4th R homework</title>
+<title>5th R homework</title>
 </head>
 <body>
-<h3># 4th R homework</h1>
+<h3># 5th R homework</h1>
 <main>
 	<pre>
 		<code class="prettyprint">
-#Problem 1
+#Problem 3
+
+pascal <- function(x) {
+  c(choose(x,seq(0,x)))
+}
 
 #(a)
 
-demand <- function(price) {
-  pmax(0,15 - price*1.5)
-}
+(0.5)^(2) * (0.5)^(7) * choose(9,2)
+(0.5)^(1) * (0.5)^(8) * choose(9,1)
+(0.5)^(0) * (0.5)^(9) * choose(9,0)
 
-?pmax
-
-expenditure <- function(price) {
-  pmax(0,15 - price*1.5)*price
-}
-
-curve(expenditure(x),xlim=c(0,30))
-curve(demand(x),xlim=c(0,30),add=TRUE,col="red")
+pascal(9)
+sum(pascal(9)[1:3]) / sum(pascal(9))
 
 #(b)
-demand_b <- function(price) {
-pmax(0,15*0.8^price)
-}
 
-expenditure_b <- function(price) {
-  pmax(0,15*0.8^price)*price
-}
+(0.5)^(4) * (0.5)^(14) * choose(18,4)
+(0.5)^(3) * (0.5)^(15) * choose(18,3)
+(0.5)^(2) * (0.5)^(16) * choose(18,2)
+(0.5)^(1) * (0.5)^(17) * choose(18,1)
+(0.5)^(0) * (0.5)^(18) * choose(18,0)
 
-curve(expenditure_b(x),xlim=c(0,30),add=TRUE,lty="dashed")
-curve(demand_b(x),xlim=c(0,30),add=TRUE,col="red",lty="dashed")
+(0.5)^(4) * (0.5)^(14) * choose(18,4) + (0.5)^(3) * (0.5)^(15) * choose(18,3) + (0.5)^(2) * (0.5)^(16) * choose(18,2) + (0.5)^(1) * (0.5)^(17) * choose(18,1) + (0.5)^(0) * (0.5)^(18) * choose(18,0)
 
-#Problem 2
+pascal(18)
+sum(pascal(18))
 
-pascal <- function(x) {
-c(choose(x,seq(0,x)))
-}
-
-pascal(16)
-
-
-#Problem 3
-
-count_chars_in_table <- function(v1,v2) {
-  length(which(match(unlist(strsplit(tolower(v1),NULL), use.names=FALSE),v2,nomatch=0)>0))
-}
-count_chars_in_table("Wien",letters[1:13])
+sum(pascal(18)[seq(1,5)]) / sum(pascal(18))
 
 
 #Problem 4
 
-no_of_odds <- function(x) {
-  length(which(x%%2==1))
-}
-no_of_odds(seq(1,6))
+male_prob <- 1/2.2
+female_prob <- 1.2/2.2
 
+sum( choose(6,seq(3,6)) * male_prob^seq(3,6) * female_prob^(6-seq(3,6)))
+
+choose(6,3) * male_prob^3 * female_prob^3
+choose(6,4) * male_prob^4 * female_prob^2
+choose(6,5) * male_prob^5 * female_prob^1
+choose(6,6) * male_prob^6 * female_prob^0
 
 #Problem 5
-x <- seq(-2,5,by=.1)
+
 #(a)
 
-curve(4-(3*x^3),xlim=c(-7,7),ylim=c(-7,7))
-curve(((x-4)/(-3))^(1/3),xlim=c(-7,7),add=TRUE)
-curve(-((x-4)/(3))^(1/3),xlim=c(-7,7),add=TRUE)
-curve(x-0,add=TRUE,col="green")
-abline(h=0,v=0,col="red")
+probs <- c(.2,.3,.1,.15,.25)
+strat1 <- c(5,11,13,15.5,16)
+strat2 <- c(-4,15,17.5,20.8,20)
 
-4-(3*(((x-4)/(-3))^(1/3))^3)
+expected <- sum(probs*strat1)
+variance <- sum(probs*(strat1-expected)^2)
+utility <- expected - sqrt(variance)
+print(utility)
+
+expected <- sum(probs*strat2)
+variance <- sum(probs*(strat2-expected)^2)
+utility <- expected - sqrt(variance)
+print(utility)
+
+# They will implement the first strategy.
 
 #(b)
-curve(1+x^2,xlim=c(0,7),ylim=c(0,7))
-curve(sqrt(x-1),xlim=c(0,7),ylim=c(0,7),add=TRUE)
-curve(x-0,add=TRUE,col="green")
-abline(h=0,v=0,col="red")
+expected1 <- mean(sample(strat1, size=1000000, replace=TRUE, prob=probs))
+variance1 <- mean(sample((strat1-expected1)^2, size=1000000, replace=TRUE, prob=probs))
+print(expected1)
+print(variance1)
+print(expected1 - sqrt(variance1))
 
-sqrt((1+x^2)-1)
+mean(sample(strat2, size=100000, replace=TRUE, prob=probs))
+
+mean(sample(c(1,2,3,4,5),replace=TRUE,prob=c(2000,400,400,600,100),size=100000))
+
+# Problem 6
+
+#(a)
+
+p_a <- 0/50000
+p_b <- 1000/50000 
+p_c <- (50000-11311)/50000
+p_d <- 11/50000
+
+p_a
+p_b
+p_c
+p_d
+
+#(b)
+
+p_aUb <- p_a + p_b - (p_a*p_b)
+p_aMb <- p_a*p_b
+p_bUc <- p_b + p_c - (p_b*p_c)
+p_bMc <- p_b*p_c
+p_cUd <- p_c + p_d - (p_c*p_d)
+
+p_aUb
+p_aMb
+p_bUc
+p_bMc
+p_cUd
 
 #(c)
 
-func5c <- function(x) {
-  ifelse(x>1,log(x^2),(exp(x)-exp(1)))
-}
+total_scratch <- 50000
+win_prob <- c(1,10,300,1000,10000,50000-(1+10+300+1000+10000))/total_scratch
+profit <- c(10000,900,32,4,2,0)-2
+expected <- sum(win_prob*profit)
 
-func5c_inverse <- function(x) {
-  ifelse(x>0,exp(x/2),log(((exp(1))+x)))
-}
+win_prob <- c(1,10,300,1000,10000)/total_scratch
+payout <- c(10000,900,32,4,2)
+expected <- sum(win_prob*payout)-2
 
+variance <- sum(win_prob*(payout-expected)^2)
+print(expected)
+print(variance)
 
-rm(x)
+expected_check <- mean(sample(payout, size=1000000, replace=TRUE, prob=win_prob))
+expected_check
 
-func5c_inverse(func5c(x))
-
-curve(func5c(x),xlim=c(-4,8),ylim=c(-3,8))
-curve(func5c_inverse(x),xlim=c(-4,8),add=TRUE)
-curve(x-0,add=TRUE,col="green")
-abline(v=1)
-abline(h=0)
 
 #Problem 7
-polyPrint <- function(a) {
-  if (length(which(a != 0)) >= 1) {
-    equ <- NULL
-    for(i in seq(1,length(a))) {
-      if (a[i] != 0) {
-        if (a[i] < 0) {
-          separator <- ""
-        } else {
-          separator <- "+"
-        }
-        if (i == 1) {
-          equ <- paste(equ,a[i],sep="")
-        } 
-        else if (i == 2) {
-          if (a[i] == 1 || a[i] == -1) {
-            if (a[i] == -1) { separator = "-"}
-            equ <- paste(equ,"x",sep=separator)
-          } else {
-            tempequ <- paste(a[i],"*x",sep="")
-            equ <- paste(equ,tempequ,sep=separator)
-          }
-        }
-        else {
-          if (a[i] == 1 || a[i] == -1) {
-            tempequ <- paste("x^",i-1,sep="")
-            if (a[i] == -1) { separator = "-"}
-            equ <- paste(equ,tempequ,sep=separator)
-          } else {
-            tempequ <- paste(a[i],"*x^",i-1,sep="")
-            equ <- paste(equ,tempequ,sep=separator)
-          }
-        }
-      }
-    }
-    if (substr(equ, 0, 1) == "+") {
-      equ <- substring(equ, 2)
-    }
-    print(equ)
-  } else {
-   FALSE 
+
+#(a)
+correct_prob <- 1/5
+incorrect_prob <- 4/5
+sum( choose(20,seq(11,20)) * correct_prob^seq(11,20) * incorrect_prob^(20-seq(11,20)) )
+
+#(b)
+length(
+  which(
+    sample(
+      0:20,
+      size = 1000000,
+      replace = TRUE,
+      prob = choose(20,seq(0,20)) * correct_prob^seq(0,20) * incorrect_prob^(20-seq(0,20)) 
+      ) > 10 
+    )
+  )/1000000
+
+#Problem 8
+
+isconvex <- function(f,x1,x2,lambda) {
+  equ <- c()
+  y1 <- f(x1)
+  y2 <- f(x2)
+  linear <- function(i) {
+    ((y2-y1)/(x2-x1))*(i-x1)+y1
   }
+  equ <- c(equ,f(lambda*x1+(1 - lambda)*x2) - lambda*f(x1) - (1 - lambda)*f(x2))
+  if (length(which(equ > 0)) == 0) {
+    print(TRUE)
+    color <- "green"
+  } else {
+    print(FALSE)
+    color <- "red"
+  }
+  curve(f,xlim=c(x1,x2))
+  curve(linear,xlim = c(x1,x2),col=color,add=TRUE)
 }
+isconvex(function(x){x^3}, -1.5, 1, seq(0,1,.001))
 
-polyPrint(c(88,1,0,-1,0,-2))
+D(D(expression(-x^4),"x"),"x")
+curve(eval(D(D(expression(-x^4),"x"),"x")),xlim=c(-2,0))
+D(D(expression(x),"x"),"x")
+uniroot(function(x){-x^3+2},c(-5,5))
 
-?unlist
-?sum
+isconvex <- function(f,x1,x2,lambda) {
+  equ <- c(f(lambda*x1+(1 - lambda)*x2) - lambda*f(x1) - (1 - lambda)*f(x2))
+  if (length(which(equ > 0)) == 0) {
+    TRUE
+  } else {
+    FALSE
+  }
 
-?is.na
+}
+isconvex(function(x){x^2}, -2, 2, seq(0,1,.001))
+
+
+# isconvex <- function(thefunc, x1, x2) {
+#   inside_func <- function(x) { eval(parse(text=thefunc)) }
+#   y1 <- inside_func(x1)
+#   y2 <- inside_func(x2)
+#   linear <- function(i) {
+#     ((y2-y1)/(x2-x1))*(i-x1)+y1
+#   }
+#   curve(inside_func,xlim = c(x1-1,x2+1),add=TRUE)
+#   curve(linear,xlim = c(x1,x2),add=TRUE,col="green")
+#   k <- seq(x1,x2,by=(x2-x1)/1000000)
+#   if (length(which(linear(k) > inside_func(k))) >= 999999) {
+#     TRUE
+#   } else {
+#     FALSE
+#   }
+# }
+# 
+# isconvex("x^3",-3,3)
+
+#(b)
+
+isconvex <- function(f,x1,x2,lambda) {
+  y1 <- f(x1)
+  y2 <- f(x2)
+  linear <- function(i) {
+    ((y2-y1)/(x2-x1))*(i-x1)+y1
+  }
+  equ <- c(f(lambda*x1+(1 - lambda)*x2) - lambda*f(x1) - (1 - lambda)*f(x2))
+  if (length(which(equ > 0)) == 0) {
+    print(TRUE)
+    color <- "green"
+  } else {
+    print(FALSE)
+    color <- "red"
+  }
+  curve(f,xlim=c(x1,x2))
+  curve(linear,xlim = c(x1,x2),col=color,add=TRUE)
+}
+isconvex(function(x){ifelse(x<0,-x^4,ifelse(x>1,exp(x) - exp(1) + 1,x))}, -.5, 1, seq(0,1,.001))
+isconvex(function(x){x^2},0,2,seq(0,1,.0001))
 
 
 		</code>
