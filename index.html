@@ -84,6 +84,8 @@ female_prob <- 1.2/2.2
 
 sum( choose(6,seq(3,6)) * male_prob^seq(3,6) * female_prob^(6-seq(3,6)))
 
+pbinom(3,6,c(1/2.2,1.2/2.2))
+
 choose(6,3) * male_prob^3 * female_prob^3
 choose(6,4) * male_prob^4 * female_prob^2
 choose(6,5) * male_prob^5 * female_prob^1
@@ -98,12 +100,16 @@ strat1 <- c(5,11,13,15.5,16)
 strat2 <- c(-4,15,17.5,20.8,20)
 
 expected <- sum(probs*strat1)
+expected
 variance <- sum(probs*(strat1-expected)^2)
+variance
 utility <- expected - sqrt(variance)
 print(utility)
 
 expected <- sum(probs*strat2)
+expected
 variance <- sum(probs*(strat2-expected)^2)
+variance
 utility <- expected - sqrt(variance)
 print(utility)
 
@@ -136,11 +142,11 @@ p_d
 
 #(b)
 
-p_aUb <- p_a + p_b - (p_a*p_b)
-p_aMb <- p_a*p_b
-p_bUc <- p_b + p_c - (p_b*p_c)
-p_bMc <- p_b*p_c
-p_cUd <- p_c + p_d - (p_c*p_d)
+p_aUb <- p_a + p_b - (0)
+p_aMb <- 0
+p_bUc <- p_b + p_c - (0)
+p_bMc <- 0
+p_cUd <- p_c + p_d - (0)
 
 p_aUb
 p_aMb
@@ -206,9 +212,12 @@ isconvex <- function(f,x1,x2,lambda) {
   curve(f,xlim=c(x1,x2))
   curve(linear,xlim = c(x1,x2),col=color,add=TRUE)
 }
-isconvex(function(x){x^3}, -1.5, 1, seq(0,1,.001))
+isconvex(function(x){x^3}, -.5, 1, seq(0,1,.001))
 
-D(D(expression(-x^4),"x"),"x")
+D(expression(x^3),"x")
+integrate(x^2)
+
+D(D(expression(-x^2^x),"x"),"x")
 curve(eval(D(D(expression(-x^4),"x"),"x")),xlim=c(-2,0))
 D(D(expression(x),"x"),"x")
 uniroot(function(x){-x^3+2},c(-5,5))
@@ -291,8 +300,9 @@ curve(3.6208*log(x) + 2.89,xlim=c(2,10))
 test_first <- -20
 3.6208*log(abs(test_first)) + 2.89
 
-test_first <- -10
+test_first <- -100
 isconvex(function(x){ifelse(x<0,-x^4,ifelse(x>1,exp(x) - exp(1) + 1,x))}, test_first, 3.6208*log(abs(test_first)) + 2.89, seq(0,1,.001))
+
 
 
 
