@@ -36,6 +36,7 @@ main {
 	margin: 60px auto;
 	padding: 40px;
 	color: #808080;
+	word-wrap: break-word;
 }
 </style>
 <title>5th R homework</title>
@@ -67,6 +68,8 @@ sum(pascal(9)[1:3]) / sum(pascal(9))
 (0.5)^(2) * (0.5)^(16) * choose(18,2)
 (0.5)^(1) * (0.5)^(17) * choose(18,1)
 (0.5)^(0) * (0.5)^(18) * choose(18,0)
+
+(0.5)^(4) * (0.5)^(14) * choose(18,4) + (0.5)^(3) * (0.5)^(15) * choose(18,3) + (0.5)^(2) * (0.5)^(16) * choose(18,2) + (0.5)^(1) * (0.5)^(17) * choose(18,1) + (0.5)^(0) * (0.5)^(18) * choose(18,0)
 
 pascal(18)
 sum(pascal(18))
@@ -260,8 +263,37 @@ isconvex <- function(f,x1,x2,lambda) {
   curve(f,xlim=c(x1,x2))
   curve(linear,xlim = c(x1,x2),col=color,add=TRUE)
 }
-isconvex(function(x){ifelse(x<0,-x^4,ifelse(x>1,exp(x) - exp(1) + 1,x))}, -.5, 1, seq(0,1,.001))
+isconvex(function(x){ifelse(x<0,-x^4,ifelse(x>1,exp(x) - exp(1) + 1,x))}, -1, 3, seq(0,1,.001))
 isconvex(function(x){x^2},0,2,seq(0,1,.0001))
+
+coeff <- c()
+i_vect <- c()
+n_vect <- c()
+
+for (n in seq(-20,-1,by=.1)) {
+  for (i in seq(1,14,by=.01)) {
+    result <- isconvex(function(x){ifelse(x<0,-x^4,ifelse(x>1,exp(x) - exp(1) + 1,x))}, n, i, seq(0,1,.001))
+    if (result == TRUE) {
+      print(i)
+      coeff <- c(coeff, abs(i/n))
+      i_vect <- c(i_vect, i)
+      n_vect <- c(n_vect, n)
+      break
+    }
+  }
+}
+coeff
+plot(n_vect,i_vect)
+
+data.frame(as.table(setNames(n_vect, i_vect)))
+curve(3.6208*log(x) + 2.89,xlim=c(2,10))
+
+test_first <- -20
+3.6208*log(abs(test_first)) + 2.89
+
+test_first <- -10
+isconvex(function(x){ifelse(x<0,-x^4,ifelse(x>1,exp(x) - exp(1) + 1,x))}, test_first, 3.6208*log(abs(test_first)) + 2.89, seq(0,1,.001))
+
 
 
 		</code>
