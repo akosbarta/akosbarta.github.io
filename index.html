@@ -157,9 +157,9 @@ p_cUd
 #(c)
 
 total_scratch <- 50000
-win_prob <- c(1,10,300,1000,10000,50000-(1+10+300+1000+10000))/total_scratch
-profit <- c(10000,900,32,4,2,0)-2
-expected <- sum(win_prob*profit)
+# win_prob <- c(1,10,300,1000,10000,50000-(1+10+300+1000+10000))/total_scratch
+# profit <- c(10000,900,32,4,2,0)-2
+# expected <- sum(win_prob*profit)
 
 win_prob <- c(1,10,300,1000,10000)/total_scratch
 payout <- c(10000,900,32,4,2)
@@ -302,7 +302,6 @@ test_first <- -20
 
 test_first <- -100
 isconvex(function(x){ifelse(x<0,-x^4,ifelse(x>1,exp(x) - exp(1) + 1,x))}, test_first, 3.6208*log(abs(test_first)) + 2.89, seq(0,1,.001))
-
 
 
 
