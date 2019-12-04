@@ -39,271 +39,165 @@ main {
 	word-wrap: break-word;
 }
 </style>
-<title>6th R homework</title>
+<title>7th R homework</title>
 </head>
 <body>
-<h3># 6th R homework</h1>
+<h3># 7th R homework</h1>
 <main>
 	<pre>
 		<code class="prettyprint">
  
+#Exercise 7
+
 #Problem 1
 
-func1 <- function(x) {
-  ifelse(x<4,-(x-2)^2+4,ifelse(x>=5,-(1/2)*(x-7.4)^2+3,0))
-}
-
-D(expression(-(x-2)^2+4),"x")
-D(expression(0*x),"x")
-D(expression(-(1/2)*(x-7.4)^2+3),"x")
-integrate(function(x)-(1/2)*(x-7.4)^2+3,lower=0, upper=Inf)
-
-func1_i <- function(x) {
-  ifelse(x<4,2*x^2-(x^3)/3,ifelse(x>=5,-0.16666*x^3+3.7*x^2-24.38*x+60.9,10.666))
-}
-
-
-func1_d <- function(x) {
-  ifelse(x<4,-(2 * (x - 2)),ifelse(x>=5,-((1/2) * (2 * (x - 7.4))),0))
-}
-
-curve(func1_i,xlim=c(0,10))
-curve(func1,xlim=c(0,10))
-curve(func1_d,xlim=c(0,10))
-
+matrixA <- matrix(c(5,1,-2,2,0,1,0,-1,1),nrow=3,ncol=3,byrow=TRUE)
+matrixB <- matrix(c(4,1,2,0,2,-1,1,-2,2),nrow=3,ncol=3,byrow=TRUE)
+matrixA
+matrixB
+matrixA + matrixB
+matrixA - matrixB
+matrixA %*% matrixB
+matrixA * matrixB
+matrixB %*% matrixA
+(matrixA - matrixB)%*%(matrixA - matrixB)
+matrixA%*%matrixA+2*matrixA%*%matrixB+matrixB%*%matrixB
 
 #Problem 2
 
-D(D(expression(1/x),"x"),"x")
-D(expression(exp(1/x)),"x")
-curve(-exp(-x))
+#(a)(b)
 
-#(b)
+MA1 <- matrix(c(2,1,-2,4,0,1,1,-1,1),nrow = 3,ncol = 3,byrow = T)
+MA2 <- matrix(c(3,-1,2,4,2,-4,2,0,2),nrow = 3,ncol = 3,byrow = T)
 
-plotit <- function(f,x1,x2) {
-  y1 <- f(x1)
-  y2 <- f(x2)
-  linear <- function(i) {
-    ((y2-y1)/(x2-x1))*(i-x1)+y1
-  }
-  curve(f,xlim=c(x1-1,x2+1))
-  curve(linear,xlim = c(x1,x2),add=TRUE)
-}
+t(MA1)
+t(MA2)
 
-f1 <- function(x)-x^2+x+4
-f2 <- function(x)1/x
-f3 <- function(x)exp(x)
-f4 <- function(x)-exp(x^-1)
+tMA1 <- t(MA1)
+tMA2 <- t(MA2)
 
-plotit(f4,1,4)
+#(c)
+all(MA1 == tMA1)
+all(MA2 == tMA2)
+all(tMA1%*%MA1 == t(tMA1%*%MA1))
+all(MA2%*%tMA2 == t(MA2%*%tMA2))
 
 
 #Problem 3
 
-polyDeriv <- function(x,a) {
-  if (length(which(a != 0)) >= 1) {
-    equ <- NULL
-    for(i in seq(1,length(a))) {
-      if (a[i] != 0) {
-        if (a[i] < 0) {
-          separator <- ""
-        } else {
-          separator <- "+"
-        }
-        if (i == 1) {
-          equ <- paste(equ,a[i],sep="")
-        } 
-        else if (i == 2) {
-          if (a[i] == 1 || a[i] == -1) {
-            if (a[i] == -1) { separator = "-"}
-            equ <- paste(equ,"x",sep=separator)
-          } else {
-            tempequ <- paste(a[i],"*x",sep="")
-            equ <- paste(equ,tempequ,sep=separator)
-          }
-        }
-        else {
-          if (a[i] == 1 || a[i] == -1) {
-            tempequ <- paste("x^",i-1,sep="")
-            if (a[i] == -1) { separator = "-"}
-            equ <- paste(equ,tempequ,sep=separator)
-          } else {
-            tempequ <- paste(a[i],"*x^",i-1,sep="")
-            equ <- paste(equ,tempequ,sep=separator)
-          }
-        }
-      }
-    }
-    if (substr(equ, 0, 1) == "+") {
-      equ <- substring(equ, 2)
-    }
-    equ <- parse(text=equ)
-    print(D(equ,"x"))
-    deriv <- D(equ,"x")
-    
-    derivate <- function(x){
-      eval(deriv)
-    }
-    derivate(x)
-    
-  } else {
-    FALSE 
-  }
-}
+#(a)
 
-polyDeriv(x = 1:3, a = c(2, 0, 1, 2))
+P <- matrix(c(4,2,0,2,2,0,0,2),nrow=2,ncol=4,byrow=T)
+Q <- matrix(c(1,0,2,0,0,0,0,3,1,0,2,0,0,3,0,0),nrow=4,ncol=4,byrow=T)
+P
+Q
+#(b)
+R <- P%*%Q
+R
 
-polyDeriv1 <- function(x,a) {
-  equ <- c()
-  for(i in seq(2,length(a))) {
-    if(a[i]*(i-1) != 0) {
-      if (i > 3) {
-        tempequ <- paste(a[i]*(i-1),"*x^",(i-2),sep="")
-        if(a[i]*(i-1) < 0) {
-          equ <- paste(equ,tempequ,sep="")
-        } else {
-          equ <- paste(equ,tempequ,sep = "+")
-        }
-      } else if (i == 3) {
-        tempequ <- paste(a[i]*(i-1),"*x",sep="")
-        if(a[i]*(i-1) < 0) {
-          equ <- paste(equ,tempequ,sep="")
-        } else {
-          equ <- paste(equ,tempequ,sep = "+")
-        }
-      }
-      else {
-        tempequ <- paste(a[i]*(i-1),sep="")
-        if(a[i]*(i-1) < 0) {
-          equ <- paste(equ,tempequ,sep="")
-        } else {
-          equ <- paste(equ,tempequ,sep = "+")
-        }
-      }
-    }
-  }
-  if (substr(equ, 0, 1) == "+") {
-    equ <- substring(equ, 2)
-  }
-  print(equ)
-  derivate <- function(x){
-    eval(parse(text=equ))
-  }
-  derivate(x)
-}
+#(c)
 
-polyDeriv1(x = 1:3, a = c(2, -1, 1, 2))
+# for(i in seq(1,nrow(P))) {
+#   print(sum(P[i,]))
+# }
+# 
+# for(i in seq(1,nrow(Q))) {
+#   print(sum(Q[i,]))
+# }
+# 
+# for(i in seq(1,nrow(R))) {
+#   print(sum(R[i,]))
+# }
+
+rowSums(P)
+rowSums(Q)
+rowSums(R)
+
+#(d)
+
+# for(i in seq(1,ncol(P))) {
+#   print(sum(P[,i]))
+# }
+# 
+# for(i in seq(1,ncol(Q))) {
+#   print(sum(Q[,i]))
+# }
+# 
+# for(i in seq(1,ncol(R))) {
+#   print(sum(R[,i]))
+# }
+
+colSums(P)
+colSums(Q)
+colSums(R)
+
 
 #Problem 4
-small_number <- 1/10000000
-fPrime <- function(f,x) {
-  (f(x+small_number)-f(x))/small_number
-}
-func4 <- function(x) { tan(x) }
-fPrime(func4,3)
 
-analytic <- function(x) eval(D(expression(tan(x)),"x"))
-analytic(3)
+newP <- t(P/rowSums(P))
+newP
+newQ <- t(Q/rowSums(Q))
+newQ
+A <- matrix(c(0.4,0.6),nrow = 2,ncol = 1)
+newQ%*%newP%*%A
 
 #Problem 5
+A <- matrix(1:2e7, nrow = 2000, ncol = 1000)
+B <- A
+v <- 1:2000
+system.time(A %*% t(B) %*% v)
+system.time((A %*% t(B)) %*% v)
+system.time(A %*% (t(B) %*% v))
 
-#(a)
-curve(100*log(1000/x),xlim=c(0,1000))
-
-#(b)
-curve(x*100*log(1000/x),xlim=c(0,1000))
-
-D(expression(x*100*log(1000/x)),"x")
-
+#Problem 6
 
 #Problem 7
 
-C = Y - I - X + M
-M = C + I + X - Y
+matPow <- function(A,k) {
+  powerit <- A
+  if (k != 1) {
+    for(i in seq(2,k)) {
+      powerit <- powerit %*% A
+    } 
+  }
+  return(powerit)
+}
+A <- matrix(1:9, ncol = 3)
+matPow(A, 5)
 
 
 #Problem 8
 
 #(a)
+MT <- matrix(c(.1,.2,.3,.4,.4,.1,.2,.3,.3,.4,.1,.2,.2,.3,.4,.1),nrow=4,ncol=4,byrow=T)
+MT
+colSums(MT)
 
-func8 <- function(x) {
-  cos(x)
-}
+#(b)
 
-a8 <- 0
+V <- t(matrix(c(.1,.2,.3,.4),nrow=1))
 
-spec_deriv <- function(f,which_order) {
-  deriv_row <- c(f)
-  for(i in seq(1,which_order)) {
-    parsed <- deriv_row[i]
-    deriv_row <- c(deriv_row,D(parsed,"x"))
+matPow8 <- function(A,k) {
+  powerit <- A%*%V
+  for(i in seq(2,k)) {
+    powerit <- A %*% powerit
   }
-  return(deriv_row[which_order])
-}
-################################ -
-
-f <- function(x) cos(x)
-n <- 10
-xs <- seq(-4,4,.005)
-
-derivative <- function(fun, n){
-  for(i in 1:n){
-    body(fun) <- D(body(fun), "x")
-  }
-  return(fun)
+  return(powerit)
 }
 
-taylor1 <- function (nvalue, a = 0) {
-  xaxis <- c()
-  yaxis <- c()
-  for (xvaluesindex in seq(-4,4,by=.005)) {
-    sumit <- 0
-    for (nloop in 1:nvalue) {
-      sumit <- sumit + (derivative(f, nloop)(xvaluesindex)/(factorial(nloop)))*(xvaluesindex - a)^(nloop)
-    }
-    sumit <- f(xvaluesindex) + sumit
-    xaxis <- c(xaxis,xvaluesindex)
-    yaxis <- c(yaxis,sumit)
-  }
-  list(x = xaxis, y = yaxis)
+matPow8(MT,2)
+matPow8(MT,5)
+
+#(c)
+for (n in c(2,3,5,10)) {
+  print(matPow(MT,n))
 }
-taylor1(n,0)
 
-plot(taylor1(n,0),type="l",col="red")
-  plot(cos,add=TRUE,xlim=c(-4,4))
-
-
-##################### ^
-
-fapprox2 <- c()
-  for (i in 0:4) {
-    derivit <- function(x){eval(spec_deriv(expression(cos(x)),i+1))}
-    fapprox2 <- paste(fapprox2,paste(derivit(i),"/",factorial(i),"*(x-",a8,")^",i,sep=""),sep = "+")
-  }
-  print(fapprox2)
-rm(x)
-x <- 0:4
-plot(x,fapprox1(x))
-
-
-
-
-
-curve(1-1/2*x^2+1/24*x^4,xlim=c(-4,4))
-
-for(i in seq(1,5)) {
-  derivit <- function(x){eval(spec_deriv(expression(cos(x)),i))}
-  print(derivit(a8))
-}
-  
-spec_deriv(expression(cos(x)),4)
-
-func8(a8) + cos(a8)/factorial(0)+(x-a8)^0 + -sin(a8)/factorial(1)+(x-a8)^1
- 
- 
- 
-+ D(expression(func8),"x")/factorial(0)+(x-a8)^0
-+ D(expression(func8),"x")/factorial(0)+(x-a8)^0
+#(d)
+matrix(.25,nrow=4,ncol=4)
+X <- t(matrix(.25,ncol=4))
+X
+MT %*% X
 
 
 		</code>
