@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+<style type="text/css">
+
+* {
+	margin: 0px;
+	padding: 0px;
+	font-family: Helvetica;
+
+}
+
+body {
+	background: #666;  /* fallback for old browsers */
+}
+
+h3 {
+	margin: 60px 0px;
+	text-align: center;
+	color: #eee;
+
+}
+
+h6 {
+	margin: 40px auto;
+	text-align: center;
+	color: #ddd;
+}
+
+main {
+	background: #eee;
+	width: 1000px;
+	border-radius: 5px;
+	min-height: 400px;
+	margin: 60px auto;
+	padding: 40px;
+	color: #808080;
+	word-wrap: break-word;
+}
+</style>
+<title>7th R homework</title>
+</head>
+<body>
+<h3># 7th R homework</h1>
+<main>
+	<pre>
+		<code class="prettyprint">
+ 
+#Exercise 7
+
+#Problem 1
+
+matrixA <- matrix(c(5,1,-2,2,0,1,0,-1,1),nrow=3,ncol=3,byrow=TRUE)
+matrixB <- matrix(c(4,1,2,0,2,-1,1,-2,2),nrow=3,ncol=3,byrow=TRUE)
+matrixA
+matrixB
+matrixA + matrixB
+matrixA - matrixB
+matrixA %*% matrixB
+matrixA * matrixB
+matrixB %*% matrixA
+(matrixA - matrixB)%*%(matrixA - matrixB)
+matrixA%*%matrixA+2*matrixA%*%matrixB+matrixB%*%matrixB
+
+#Problem 2
+
+#(a)(b)
+
+MA1 <- matrix(c(2,1,-2,4,0,1,1,-1,1),nrow = 3,ncol = 3,byrow = T)
+MA2 <- matrix(c(3,-1,2,4,2,-4,2,0,2),nrow = 3,ncol = 3,byrow = T)
+
+t(MA1)
+t(MA2)
+
+tMA1 <- t(MA1)
+tMA2 <- t(MA2)
+
+#(c)
+all(MA1 == tMA1)
+all(MA2 == tMA2)
+all(tMA1%*%MA1 == t(tMA1%*%MA1))
+all(MA2%*%tMA2 == t(MA2%*%tMA2))
+
+
+#Problem 3
+
+#(a)
+
+P <- matrix(c(4,2,0,2,2,0,0,2),nrow=2,ncol=4,byrow=T)
+Q <- matrix(c(1,0,2,0,0,0,0,3,1,0,2,0,0,3,0,0),nrow=4,ncol=4,byrow=T)
+P
+Q
+#(b)
+R <- P%*%Q
+R
+
+#(c)
+
+# for(i in seq(1,nrow(P))) {
+#   print(sum(P[i,]))
+# }
+# 
+# for(i in seq(1,nrow(Q))) {
+#   print(sum(Q[i,]))
+# }
+# 
+# for(i in seq(1,nrow(R))) {
+#   print(sum(R[i,]))
+# }
+
+rowSums(P)
+rowSums(Q)
+rowSums(R)
+
+#(d)
+
+# for(i in seq(1,ncol(P))) {
+#   print(sum(P[,i]))
+# }
+# 
+# for(i in seq(1,ncol(Q))) {
+#   print(sum(Q[,i]))
+# }
+# 
+# for(i in seq(1,ncol(R))) {
+#   print(sum(R[,i]))
+# }
+
+colSums(P)
+colSums(Q)
+colSums(R)
+
+
+#Problem 4
+
+newP <- t(P/rowSums(P))
+newP
+newQ <- t(Q/rowSums(Q))
+newQ
+A <- matrix(c(0.4,0.6),nrow = 2,ncol = 1)
+newQ%*%newP%*%A
+
+#Problem 5
+A <- matrix(1:2e7, nrow = 2000, ncol = 1000)
+B <- A
+v <- 1:2000
+system.time(A %*% t(B) %*% v)
+system.time((A %*% t(B)) %*% v)
+system.time(A %*% (t(B) %*% v))
+
+#Problem 6
+
+#Problem 7
+
+matPow <- function(A,k) {
+  powerit <- A
+  if (k != 1) {
+    for(i in seq(2,k)) {
+      powerit <- powerit %*% A
+    } 
+  }
+  return(powerit)
+}
+A <- matrix(1:9, ncol = 3)
+matPow(A, 5)
+
+
+#Problem 8
+
+#(a)
+MT <- matrix(c(.1,.2,.3,.4,.4,.1,.2,.3,.3,.4,.1,.2,.2,.3,.4,.1),nrow=4,ncol=4,byrow=T)
+MT
+colSums(MT)
+
+#(b)
+
+V <- t(matrix(c(.1,.2,.3,.4),nrow=1))
+
+matPow8 <- function(A,k) {
+  powerit <- A%*%V
+  for(i in seq(2,k)) {
+    powerit <- A %*% powerit
+  }
+  return(powerit)
+}
+
+matPow8(MT,2)
+matPow8(MT,5)
+
+#(c)
+for (n in c(2,3,5,10)) {
+  print(matPow(MT,n))
+}
+
+#(d)
+matrix(.25,nrow=4,ncol=4)
+X <- t(matrix(.25,ncol=4))
+X
+MT %*% X
+
+
+		</code>
+	</pre>
+</main>
+<h6>#&copy; Copyright 2019 - Akos Barta</h2>
+</body>
+</html>

@@ -1,208 +1,468 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+	<title>Resume</title>
+	<meta charset="utf-8">
 <style type="text/css">
 
-* {
-	margin: 0px;
-	padding: 0px;
-	font-family: Helvetica;
-
-}
-
 body {
-	background: #666;  /* fallback for old browsers */
+	background: #eee;
+	margin: 0px;
+	font-family: Helvetica;
+	color: #333;
 }
 
-h3 {
-	margin: 60px 0px;
-	text-align: center;
-	color: #eee;
-
-}
-
-h6 {
-	margin: 40px auto;
-	text-align: center;
-	color: #ddd;
+.cont {
+	max-width: 900px;
+	width: 900px;
+	margin: 0px auto;
 }
 
 main {
-	background: #eee;
-	width: 1000px;
-	border-radius: 5px;
-	min-height: 400px;
-	margin: 60px auto;
-	padding: 40px;
-	color: #808080;
-	word-wrap: break-word;
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: space-between;
 }
+
+header {
+	width: 900px;
+	background: #333;
+	/*background: linear-gradient(90deg, rgba(51,51,51,1) 0%, rgba(70,70,70,1) 100%);*/
+	margin: 0px auto;
+	color: #fff;
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: space-between;
+	padding: 0px 20px;
+	box-sizing: border-box;
+	align-items: center;
+}
+
+.image {
+	padding: 20px 0px;
+	padding-left: 20px;
+}
+
+.image img {
+	width: 120px;
+	border-radius: 50%;
+	border: 2px solid #bbb;
+}
+
+.name {
+	padding: 30px 0px;
+	margin-left: -80px;
+}
+
+.bigname {
+	font-size: 36px;
+	font-weight: lighter;
+}
+
+.contact {
+	padding: 30px 0px;
+	padding-right: 20px;
+	display: flex;
+	flex-flow: column wrap;
+}
+
+.contact_opt {
+	margin-bottom: 10px;
+	font-size: 16px;
+	font-weight: normal;
+	color: #eee;
+}
+
+.contact_opt .fas {
+	color: #4092ff;
+}
+
+.contact_opt .fab {
+	color: #4092ff;
+}
+
+.contact_opt a {
+	text-decoration: none;
+	color: inherit;
+}
+
+.left {
+	max-width: 70%;
+	width: 68%;
+}
+
+.right {
+	max-width: 30%;
+	width: 28%;
+}
+
+.left-sect {
+	padding: 20px 20px;
+}
+
+.left-title {
+	font-size: 26px;
+	font-weight: lighter;
+	margin-bottom: 20px;
+}
+
+.left-inner {
+
+}
+
+.no-bottom {
+	margin-bottom: 0px !important;
+}
+
+.left-mini {
+	font-size: 12px;
+	color: #777;
+	font-weight: normal;
+}
+
+.left-inner-item {
+	display: flex;
+	flex-flow: column wrap;
+	padding-left: 10px;
+	border-left: 2px solid #4092ff;
+	margin-bottom: 50px;
+}
+
+.left-inner-info {
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: space-between;
+}
+
+.left-inner-image {
+	height: 32px;
+	vertical-align: middle;
+	display: inline-block;
+	margin-right: 6px;
+}
+
+.left-inner-pos {
+	display: flex;
+	flex-flow: column wrap;
+}
+
+.left-inner-data {
+	display: flex;
+	flex-flow: column wrap;
+	text-align: right;
+	color: #555;
+}
+
+.left-inner-title {
+	font-size: 16px;
+	font-weight: bold;
+	color: #4092ff;
+}
+
+.left-inner-comp {
+	font-size: 16px;
+	font-weight: bold;
+	margin-top: 6px;
+}
+
+.left-inner-time {
+	font-size: 16px;
+	font-weight: normal;
+	font-weight: bold;
+}
+
+.left-inner-place {
+	font-size: 14px;
+	font-weight: normal;
+	margin-top: 6px;
+}
+
+.left-inner-desc {
+	font-size: 14px;
+	font-weight: normal;
+	margin-top: 10px;
+	padding-left: 10px;
+	color: #555;
+}
+
+.left-inner-list {
+	padding-left: 10px;
+	margin-top: 10px;
+}
+
+.left-inner-list-item {
+
+}
+
+ul {
+	list-style: none;
+}
+
+ul li::before {
+  content: "\2022";  /* Add content: \2022 is the CSS Code/unicode for a bullet */
+  color: #4092ff; /* Change the color */
+  font-weight: bold; /* If you want it to be bold */
+  font-size: 16px;
+  display: inline-block; /* Needed to add space between the bullet and the text */ 
+  width: 1em; /* Also needed for space (tweak if needed) */
+  margin-left: -1em; /* Also needed for space (tweak if needed) */
+}
+
+
+
+
+
+.right-sect {
+	padding: 20px 20px;
+}
+
+.right-title {
+	font-size: 26px;
+	font-weight: lighter;
+	margin-bottom: 20px;
+}
+
+.skill-item {
+	margin-bottom: 20px;
+	display: flex;
+	flex-flow: column wrap;
+}
+
+.skill-title {
+	font-size: 16px;
+	font-weight: bold;
+}
+
+.skill-bar {
+	width: 100%;
+	height: 6px;
+	/*background: #bbb;*/
+	border-radius: 6px;
+	margin-top: 6px;
+	border: 2px solid #4092ff;
+
+}
+
+.skill-fill {
+	height: 6px;
+	background: #4092ff;
+}
+
+.skill-desc {
+	font-size: 12px;
+	color: #555;
+	margin-top: 6px;
+}
+		
 </style>
-<title>7th R homework</title>
+<script src="https://kit.fontawesome.com/1c1b8b53a2.js" crossorigin="anonymous"></script>
 </head>
 <body>
-<h3># 7th R homework</h1>
-<main>
-	<pre>
-		<code class="prettyprint">
- 
-#Exercise 7
 
-#Problem 1
+<div class="cont">
+	<header>
+		<section class="image"><img src="profile_small.png"></section>
+		<section class="name">
+			<div class="bigname">Akos Barnabas Barta</div>
+		</section>
+		<section class="contact">
+			<div class="contact_opt"><i class="fas fa-map-marker-alt"></i>&nbsp;&nbsp;&nbsp;Vienna, Austria</div>
+			<div class="contact_opt"><i class="fas fa-at"></i>&nbsp;&nbsp;&nbsp;<a href="mailto:barta.akos@gmail.com">barta.akos@gmail.com</a></div>
+			<div class="contact_opt"><i class="fas fa-mobile-alt"></i>&nbsp;&nbsp;&nbsp;+36205556121</div>
+			<div class="contact_opt"><i class="fab fa-linkedin"></i>&nbsp;&nbsp;&nbsp;<a href="http://linkedin.com/in/akosbarta/">linkedin.com/in/akosbarta/</a></div>
+		</section>
+	</header>
 
-matrixA <- matrix(c(5,1,-2,2,0,1,0,-1,1),nrow=3,ncol=3,byrow=TRUE)
-matrixB <- matrix(c(4,1,2,0,2,-1,1,-2,2),nrow=3,ncol=3,byrow=TRUE)
-matrixA
-matrixB
-matrixA + matrixB
-matrixA - matrixB
-matrixA %*% matrixB
-matrixA * matrixB
-matrixB %*% matrixA
-(matrixA - matrixB)%*%(matrixA - matrixB)
-matrixA%*%matrixA+2*matrixA%*%matrixB+matrixB%*%matrixB
+	<main>
+		<section class="left">
+			<section class="work left-sect">
+				<div class="left-title">Work experience</div>
+				<div class="left-inner">
+					<div class="left-inner-item no-bottom">
+						<div class="left-inner-info">
+							<div class="left-inner-pos">
+								<div class="left-inner-title">Customer Service Representative</div>
+								<div class="left-inner-comp"><img src="tc.png" class="left-inner-image">Transcosmos Inc.<br><img src="ra.png" class="left-inner-image">(Ryanair Division)</div>
+							</div>
+							<div class="left-inner-data">
+								<div class="left-inner-time"><i class="fas fa-calendar-alt"></i>&nbsp;Oct 2017 - Apr 2018</div>
+								<div class="left-inner-place"><i class="fas fa-map-marker-alt"></i>&nbsp;Debrecen, Hungary</div>
+							</div>
+						</div>
+						<div class="left-inner-desc">
+						As an English speaking customer service representative for one of the leading airlines in Europe, I gained valuable experience in working proactively, communicating quickly and efficiently, and handling client complaints professionally. I had a customer satisfaction score of 95%+. My duties included:
+							<ul class="left-inner-list">
+								<li class="left-inner-list-item">Handling contacts via various channels such as phone, chat, e-mail</li>
+								<li class="left-inner-list-item">Processing flight reservations</li>
+								<li class="left-inner-list-item">Efficiently answering customer queries and resolving customer complaints</li>
+								<li class="left-inner-list-item">Organising special needs assistance for passengers with reduced mobility</li>
+								<li class="left-inner-list-item">Processing other administrative tasks related to flight reservations</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</section>
+			<section class="edu left-sect">
+				<div class="left-title">Education</div>
+				<div class="left-inner">
+					<div class="left-inner-item">
+						<div class="left-inner-info">
+							<div class="left-inner-pos">
+								<div class="left-inner-title">Bachelor in Business and Economics</div>
+								<div class="left-inner-comp"><img src="wu.png" class="left-inner-image">Vienna University of Economics and Business</div>
+							</div>
+							<div class="left-inner-data">
+								<div class="left-inner-time"><i class="fas fa-calendar-alt"></i>&nbsp;2019 - 2022 <span class="left-mini">(expected)</span></div>
+								<div class="left-inner-place"><i class="fas fa-map-marker-alt"></i>&nbsp;Vienna, Austria</div>
+							</div>
+						</div>
+						<div class="left-inner-desc">I am currently studying in the English-taught BSc programme "Business and Economics" at the Vienna University of Economics and Business (Wirtschaftsuniversität Wien). I am particularly interested in Finance, Statistics, Forecasting and Data Science. Courses taken so far:
+							<ul class="left-inner-list">
+								<li class="left-inner-list-item">Business and Society</li>
+								<li class="left-inner-list-item">Contemporary challenges in Business and Economics</li>
+								<li class="left-inner-list-item">Governance and legal environment</li>
+								<li class="left-inner-list-item">Quantitative methods I.</li>
+								<li class="left-inner-list-item">Quantitative methods II.</li>
+								<li class="left-inner-list-item">Understanding Business</li>
+								<li class="left-inner-list-item">Law, Economics and Business</li>
+								<li class="left-inner-list-item">Foundations in Microeconomics</li>
+								<li class="left-inner-list-item">Foundations in Socioeconomics</li>
+							</ul>
+						</div>
+					</div>
 
-#Problem 2
+					<div class="left-inner-item">
+						<div class="left-inner-info">
+							<div class="left-inner-pos">
+								<div class="left-inner-title">Bachelor in International Business</div>
+								<div class="left-inner-comp"><img src="cub.png" class="left-inner-image">Corvinus University of Budapest</div>
+							</div>
+							<div class="left-inner-data">
+								<div class="left-inner-time"><i class="fas fa-calendar-alt"></i>&nbsp;2016 - 2017 <span class="left-mini">(discontinued)</span></div>
+								<div class="left-inner-place"><i class="fas fa-map-marker-alt"></i>&nbsp;Budapest, Hungary</div>
+							</div>
+						</div>
+						<div class="left-inner-desc">I was a student in the Hungarian-taught BA programme "International Business" at the Corvinus University of Budapest for one semester before discontinuing studies there due to personal reasons. Courses taken:
+							<ul class="left-inner-list">
+								<li class="left-inner-list-item">Environmental Economics</li>
+								<li class="left-inner-list-item">Mathematics</li>
+								<li class="left-inner-list-item">Economical History</li>
+								<li class="left-inner-list-item">Informatics</li>
+								<li class="left-inner-list-item">Microeconomics</li>
+								<li class="left-inner-list-item">Business Economics</li>
+							</ul>
+						</div>
+					</div>
 
-#(a)(b)
+				<div class="left-inner-item no-bottom">
+						<div class="left-inner-info">
+							<div class="left-inner-pos">
+								<div class="left-inner-title">Secondary Education</div>
+								<div class="left-inner-comp"><img src="klgyg.png" class="left-inner-image">Kossuth Lajos Secondary Grammar School of the University of Debrecen</div>
+							</div>
+							<div class="left-inner-data">
+								<div class="left-inner-time"><i class="fas fa-calendar-alt"></i>&nbsp;2010 - 2016</div>
+								<div class="left-inner-place"><i class="fas fa-map-marker-alt"></i>&nbsp;Debrecen, Hungary</div>
+							</div>
+						</div>
+						<div class="left-inner-desc">I graduated from one of the best grammar schools in Hungary with a matura point score of 476/500.</div>
+					</div>
+				</div>
+			</section>
+		</section>
+		<section class="right">
+			<section class="skills right-sect">
+				<div class="right-title">Skills</div>
+				<div class="right-inner">
+					<div class="skill-item">
+						<div class="skill-title">Web development and design</div>
+						<div class="skill-bar">
+							<div class="skill-fill" style="width: 90%;"></div>
+						</div>
+						<div class="skill-desc">9 years of experience in using the LAMP stack to develop web applications and tools mainly for personal usage. Advanced knowledge of CSS, Javascript and jQuery.</div>
+					</div>
 
-MA1 <- matrix(c(2,1,-2,4,0,1,1,-1,1),nrow = 3,ncol = 3,byrow = T)
-MA2 <- matrix(c(3,-1,2,4,2,-4,2,0,2),nrow = 3,ncol = 3,byrow = T)
+					<div class="skill-item">
+						<div class="skill-title">GIS</div>
+						<div class="skill-bar">
+							<div class="skill-fill" style="width: 60%;"></div>
+						</div>
+						<div class="skill-desc">Intermediate knowledge in observing, editing, and analysing geospatial data with the use of tools such as QGIS and R.</div>
+					</div>
 
-t(MA1)
-t(MA2)
+					<div class="skill-item">
+						<div class="skill-title">R programming</div>
+						<div class="skill-bar">
+							<div class="skill-fill" style="width: 65%;"></div>
+						</div>
+						<div class="skill-desc">Intermediate knowledge in statistical programming and data visualisation.</div>
+					</div>
 
-tMA1 <- t(MA1)
-tMA2 <- t(MA2)
+					<div class="skill-item">
+						<div class="skill-title">Domain names</div>
+						<div class="skill-bar">
+							<div class="skill-fill" style="width: 95%;"></div>
+						</div>
+						<div class="skill-desc">4 years of experience in domain name investing.</div>
+					</div>
 
-#(c)
-all(MA1 == tMA1)
-all(MA2 == tMA2)
-all(tMA1%*%MA1 == t(tMA1%*%MA1))
-all(MA2%*%tMA2 == t(MA2%*%tMA2))
+					<div class="skill-item">
+						<div class="skill-title">Communication</div>
+						<div class="skill-bar">
+							<div class="skill-fill" style="width: 100%;"></div>
+						</div>
+						<div class="skill-desc">High-level verbal and written communication skills.</div>
+					</div>
+				</div>
+			</section>
 
+			<section class="languages right-sect">
+				<div class="right-title">Languages</div>
+				<div class="right-inner">
+					<div class="skill-item">
+						<div class="skill-title">English</div>
+						<div class="skill-bar">
+							<div class="skill-fill" style="width: 95%;"></div>
+						</div>
+						<div class="skill-desc">Full Professional Proficiency as a result of residing in the United Kingdom for 5 years as a child.</div>
+					</div>
 
-#Problem 3
+					<div class="skill-item">
+						<div class="skill-title">Hungarian</div>
+						<div class="skill-bar">
+							<div class="skill-fill" style="width: 100%;"></div>
+						</div>
+						<div class="skill-desc">Native language</div>
+					</div>
 
-#(a)
+					<div class="skill-item">
+						<div class="skill-title">German</div>
+						<div class="skill-bar">
+							<div class="skill-fill" style="width: 10%;"></div>
+						</div>
+						<div class="skill-desc">Elementary Proficiency</div>
+					</div>
+				</div>
+			</section>
 
-P <- matrix(c(4,2,0,2,2,0,0,2),nrow=2,ncol=4,byrow=T)
-Q <- matrix(c(1,0,2,0,0,0,0,3,1,0,2,0,0,3,0,0),nrow=4,ncol=4,byrow=T)
-P
-Q
-#(b)
-R <- P%*%Q
-R
+			<section class="languages right-sect">
+				<div class="right-title">Achievements &amp; Certificates</div>
+				<div class="right-inner">
+					<div class="skill-item">
+						<div class="skill-title"><img src="cae.png" class="left-inner-image">Cambridge Advanced English C2 Proficiency Certification</div>
+						<div class="skill-desc">from Cambridge Assessment English</div>
+					</div>
 
-#(c)
+					<div class="skill-item">
+						<div class="skill-title"><img src="hult.png" class="left-inner-image">Hult Prize 2020 Regional Summit Competitor</div>
+						<div class="skill-desc">Developed a prototype for an eco-conscious travel search application (Team GenAIRation)</div>
+					</div>
 
-# for(i in seq(1,nrow(P))) {
-#   print(sum(P[i,]))
-# }
-# 
-# for(i in seq(1,nrow(Q))) {
-#   print(sum(Q[i,]))
-# }
-# 
-# for(i in seq(1,nrow(R))) {
-#   print(sum(R[i,]))
-# }
+				</div>
+			</section>
+		</section>
+	</main>
+</div>
 
-rowSums(P)
-rowSums(Q)
-rowSums(R)
-
-#(d)
-
-# for(i in seq(1,ncol(P))) {
-#   print(sum(P[,i]))
-# }
-# 
-# for(i in seq(1,ncol(Q))) {
-#   print(sum(Q[,i]))
-# }
-# 
-# for(i in seq(1,ncol(R))) {
-#   print(sum(R[,i]))
-# }
-
-colSums(P)
-colSums(Q)
-colSums(R)
-
-
-#Problem 4
-
-newP <- t(P/rowSums(P))
-newP
-newQ <- t(Q/rowSums(Q))
-newQ
-A <- matrix(c(0.4,0.6),nrow = 2,ncol = 1)
-newQ%*%newP%*%A
-
-#Problem 5
-A <- matrix(1:2e7, nrow = 2000, ncol = 1000)
-B <- A
-v <- 1:2000
-system.time(A %*% t(B) %*% v)
-system.time((A %*% t(B)) %*% v)
-system.time(A %*% (t(B) %*% v))
-
-#Problem 6
-
-#Problem 7
-
-matPow <- function(A,k) {
-  powerit <- A
-  if (k != 1) {
-    for(i in seq(2,k)) {
-      powerit <- powerit %*% A
-    } 
-  }
-  return(powerit)
-}
-A <- matrix(1:9, ncol = 3)
-matPow(A, 5)
-
-
-#Problem 8
-
-#(a)
-MT <- matrix(c(.1,.2,.3,.4,.4,.1,.2,.3,.3,.4,.1,.2,.2,.3,.4,.1),nrow=4,ncol=4,byrow=T)
-MT
-colSums(MT)
-
-#(b)
-
-V <- t(matrix(c(.1,.2,.3,.4),nrow=1))
-
-matPow8 <- function(A,k) {
-  powerit <- A%*%V
-  for(i in seq(2,k)) {
-    powerit <- A %*% powerit
-  }
-  return(powerit)
-}
-
-matPow8(MT,2)
-matPow8(MT,5)
-
-#(c)
-for (n in c(2,3,5,10)) {
-  print(matPow(MT,n))
-}
-
-#(d)
-matrix(.25,nrow=4,ncol=4)
-X <- t(matrix(.25,ncol=4))
-X
-MT %*% X
-
-
-		</code>
-	</pre>
-</main>
-<h6>#&copy; Copyright 2019 - Akos Barta</h2>
 </body>
 </html>
